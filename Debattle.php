@@ -7,12 +7,12 @@
 	//*******************
 	//To form validation
 	//*******************
-	if(isset($_GET["to"])){ //if there is ?to= in the URL
-		if(empty($_GET["to"])){ //if it is empty
+	if(isset($_GET["challengee"])){ //if there is ?to= in the URL
+		if(empty($_GET["challengee"])){ //if it is empty
 			$everything_was_okay = false; //empty
 			echo "Please enter the user you want to challenge! <br>"; // yes it is empty
 		}else{
-			echo "Challengee: ".$_GET["to"]."<br>"; //no it is not empty
+			echo "Challengee: ".$_GET["challengee"]."<br>"; //no it is not empty
 		}
 	}else{
 		$everything_was_okay = false; // do not exist
@@ -77,7 +77,7 @@
 		// d - decimanl, float
 		
 		//for each question mark its type with one letter
-		$stmt->bind_param ("sssssssi", $_GET["to"], $_GET["motion"], $_GET["position"], $_GET["visibility"], $_GET["bday"], $_GET["bday2"], $_GET["favcolor"], $_GET["characters"]);
+		$stmt->bind_param ("sssssssi", $_GET["challengee"], $_GET["motion"], $_GET["position"], $_GET["visibility"], $_GET["start_date"], $_GET["end_date"], $_GET["favcolor"], $_GET["characters"]);
 		
 		//save
 		if ($stmt->execute ()){
@@ -93,24 +93,24 @@
 <h2> Debattle Request </h2>
 
 <form method="get">
-	<label for="to">User to Challenge:* <label>
-	<input type="text" placeholder="@" name="to"><br><br>
+	<label for="challengee">User to Challenge:* <label>
+	<input type="text" placeholder="@" name="challengee"><br><br>
 	
 	<label for="motion">Motion:* <label>
 	<input type="text" name="motion"><br><br>
 	
 	Position: <br>
-	<input type="radio" name="position" value="Pro" checked> Pro<br>
+	<input type="radio" name="position" value="Pro" > Pro<br>
     <input type="radio" name="position" value="Against"> Against<br><br>
 	
 	Visibility: <br>
-	<input type="radio" name="visibility" value="Open" checked> Open<br>
+	<input type="radio" name="visibility" value="Open" > Open<br>
     <input type="radio" name="visibility" value="Closed"> Closed<br><br>
 	
 	Start Date:
-    <input type="date" name="bday"><br><br>
+    <input type="date" name="start_date"><br><br>
 	End Date:
-    <input type="date" name="bday2"><br><br>
+    <input type="date" name="end_date"><br><br>
 	
 	Select your favorite color:
     <input type="color" name="favcolor"><br><br>
