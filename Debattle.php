@@ -65,7 +65,7 @@
 		//4 database
 		$mysql = new mysqli("localhost", $db_username, $db_password, "webpr2016_islam");
 		
-		$stmt = $mysql->prepare ("INSERT INTO debattle_request (challengee, motion, start_date, end_date, characters) VALUES (?,?,?,?,?)
+		$stmt = $mysql->prepare ("INSERT INTO debattle_request (challengee, motion, position, visibility, start_date, end_date, favcolor, characters) VALUES (?,?,?,?,?,?,?,?)
 		");
 		
 		//echo error
@@ -77,7 +77,7 @@
 		// d - decimanl, float
 		
 		//for each question mark its type with one letter
-		$stmt->bind_param ("ssssi", $_GET["to"], $_GET["motion"], $_GET["bday"], $_GET["bday2"], $_GET["characters"]);
+		$stmt->bind_param ("sssssssi", $_GET["to"], $_GET["motion"], $_GET["position"], $_GET["visibility"], $_GET["bday"], $_GET["bday2"], $_GET["favcolor"], $_GET["characters"]);
 		
 		//save
 		if ($stmt->execute ()){
@@ -100,12 +100,12 @@
 	<input type="text" name="motion"><br><br>
 	
 	Position: <br>
-	<input type="radio" name="Position" value="Pro" checked> Pro<br>
-    <input type="radio" name="Position" value="Against"> Against<br><br>
+	<input type="radio" name="position" value="Pro" checked> Pro<br>
+    <input type="radio" name="position" value="Against"> Against<br><br>
 	
 	Visibility: <br>
-	<input type="radio" name="Visibility" value="Open" checked> Open<br>
-    <input type="radio" name="Visibility" value="Closed"> Closed<br><br>
+	<input type="radio" name="visibility" value="Open" checked> Open<br>
+    <input type="radio" name="visibility" value="Closed"> Closed<br><br>
 	
 	Start Date:
     <input type="date" name="bday"><br><br>

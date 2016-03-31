@@ -34,7 +34,7 @@
 	
 	
 	//SQL sentence // to show all results, remove ORDER 
-	$stmt = $mysql->prepare("SELECT id, challengee, motion, start_date, end_date, characters, created FROM debattle_request WHERE deleted IS NULL ORDER BY created LIMIT 10 ");
+	$stmt = $mysql->prepare("SELECT id, challengee, motion, position, visibility, start_date, end_date, favcolor, characters, created FROM debattle_request WHERE deleted IS NULL ORDER BY created LIMIT 40 ");
 	
 	// on the above WHERE, WHERE deleted IS NULL show only those that are not deleted. WHERE should be before the ORDER
 	
@@ -42,7 +42,7 @@
 	echo $mysql->error;
 	
 	//variable for data for each row we will get
-	$stmt->bind_result($id, $challengee, $motion, $start_date, $end_date, $characters, $created);
+	$stmt->bind_result($id, $challengee, $motion, $position, $visibility, $start_date, $end_date, $favcolor, $characters, $created);
 
 	//query
 	$stmt->execute ();
@@ -57,11 +57,15 @@
 		$table_html .= "<th>ID</th>"; //table header
 		$table_html .= "<th>Challengee</th>"; //table header
 		$table_html .= "<th>Motion</th>"; //table header
+		$table_html .= "<th>Position</th>"; //table header
+		$table_html .= "<th>Visibility</th>"; //table header
 		$table_html .= "<th>Start Date</th>"; //table header
 		$table_html .= "<th>End Date</th>"; //table header
+		$table_html .= "<th>Favourite Colour</th>"; //table header
 		$table_html .= "<th>Characters</th>"; //table header
 		$table_html .= "<th>Created</th>"; //table header
 		$table_html .= "<th>Delete?</th>"; //table header
+		$table_html .= "<th>Edit</th>"; //table header
 	$table_html .= "</tr>"; //table row closing
 	
 	// GET RESULTS
@@ -74,11 +78,15 @@
 		$table_html .= "<td>" .$id. "</td>"; //add coloumns
 		$table_html .= "<td>" .$challengee. "</td>"; 
 		$table_html .= "<td>" .$motion. "</td>"; 
+		$table_html .= "<td>" .$position. "</td>"; 
+		$table_html .= "<td>" .$visibility. "</td>"; 
 		$table_html .= "<td>" .$start_date. "</td>"; 
-		$table_html .= "<td>" .$end_date. "</td>"; 
+		$table_html .= "<td>" .$end_date. "</td>";
+		$table_html .= "<td>" .$favcolor. "</td>";  
 		$table_html .= "<td>" .$characters. "</td>"; 
 		$table_html .= "<td>" .$created. "</td>";
-		$table_html .= "<td><a href='?delete=" .$id."'>Remove</a></td>";		
+		$table_html .= "<td><a href='?delete=" .$id."'>Remove</a></td>";
+		$table_html .= "<td><a href='edit.php?edit=".$id."'>edit</a></td>";		
 	$table_html .= "</tr>"; //end row
 		
 	}
